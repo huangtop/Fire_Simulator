@@ -381,10 +381,11 @@ class StreamlitFIREPlanningTool:
         return
     
     def run_full_simulation(self):
-        """運行完整的退休模擬 - 透過後端API（UI完全保留）"""
+        """運行完整的退休模擬 - 直接調用本地模擬邏輯（適配 Streamlit Cloud）"""
         try:
             self.log_event("🚀 開始完整退休模擬...")
 
+            # 準備模擬參數
             payload = {
                 "player_status": {
                     "age": getattr(self.player_status, 'age', 25),
@@ -428,8 +429,22 @@ class StreamlitFIREPlanningTool:
                 "life_planning": st.session_state.get('life_planning', {}),
             }
 
-            resp = call_backend_api("/api/simulate", payload)
+            # 直接調用本地模擬函數，而不是 API
+            try:
+                from backend.core.simulation import run_simulation
+                resp = run_simulation(payload)
+                self.log_event("✅ 使用本地模擬引擎")
+            except ImportError as e:
+                self.log_event(f"❌ 無法載入模擬引擎: {e}")
+                # 回退到 API 調用（用於開發環境）
+                try:
+                    resp = call_backend_api("/api/simulate", payload)
+                    self.log_event("✅ 使用後端 API 模擬")
+                except Exception as api_e:
+                    self.log_event(f"❌ API 調用也失敗: {api_e}")
+                    raise RuntimeError("無法執行模擬：本地引擎和 API 都不可用")
 
+            # 處理模擬結果
             self.simulation_results = resp.get("simulation_results", {}) or {}
             # Normalize keys to int if they are strings
             if self.simulation_results:
@@ -439,6 +454,7 @@ class StreamlitFIREPlanningTool:
                         self.simulation_results = {int(k): v for k, v in self.simulation_results.items()}
                 except Exception:
                     pass
+            
             self.financial_results = []
             for item in resp.get("financial_results", []) or []:
                 r = MonthlyFinancialResult()
@@ -516,6 +532,8 @@ class StreamlitFIREPlanningTool:
             return True
         except Exception as e:
             self.log_event(f"❌ 模擬過程中發生錯誤: {str(e)}")
+            import traceback
+            self.log_event(f"❌ 詳細錯誤: {traceback.format_exc()}")
             return False
     
     def draw_monopoly_board_streamlit(self, scale=0.7, start_age=20, end_age=None):
