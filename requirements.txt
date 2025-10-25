@@ -1,17 +1,17 @@
-# Backend requirements
-fastapi>=0.100.0
-uvicorn[standard]>=0.20.0
-pydantic>=2.0.0
-python-multipart>=0.0.5
-
-# Frontend requirements
+# Core requirements for Streamlit Cloud
 streamlit>=1.25.0
-requests>=2.28.0
 pandas>=1.5.0
 matplotlib>=3.6.0
-plotly>=5.10.0
 numpy>=1.20.0
+plotly>=5.10.0
 
-# Chinese font support for matplotlib
-font-noto-cjk
-font-noto-sans-cjk
+# Backend (optional for Streamlit deployment)
+# fastapi>=0.100.0
+# uvicorn[standard]>=0.20.0
+# pydantic>=2.0.0
+# python-multipart>=0.0.5
+# requests>=2.28.0
+
+# Chinese font support - using Python packages instead of system fonts
+# fonts-noto-cjk
+# fonts-noto-cjk-extra
