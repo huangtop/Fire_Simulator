@@ -19,22 +19,22 @@ def run_simulation(payload: Dict[str, Any]) -> Dict[str, Any]:
 
     # Minimal placeholder computation to preserve interface; replace with full
     # private implementation in your private repo.
-    age = int(ps.get("age", 25))
-    retirement_age = int(invest.get("retirement_age", 65))
-    life_expectancy = int(invest.get("life_expectancy", 85))
+    age = int(ps.get("age") or 25)
+    retirement_age = int(invest.get("retirement_age") or 65)
+    life_expectancy = int(invest.get("life_expectancy") or 85)
     years = max(0, retirement_age - age)
     years_in_retirement = max(0, life_expectancy - retirement_age)
 
     # Synthesize a tiny monthly series to unblock UI rendering.
     financial_results: List[Dict[str, Any]] = []
-    savings = float(ps.get("savings", 0))
-    monthly_income = float(ps.get("monthly_income", 0))
-    monthly_expense = float(ps.get("monthly_expense", 0))
-    debt = float(ps.get("debt", 0))
+    savings = float(ps.get("savings") or 0)
+    monthly_income = float(ps.get("monthly_income") or 0)
+    monthly_expense = float(ps.get("monthly_expense") or 0)
+    debt = float(ps.get("debt") or 0)
 
-    inflation = float(invest.get("inflation_rate", 0.03))
-    cons_ret = float(invest.get("conservative_return_rate", 0.03))
-    growth_ret = float(invest.get("growth_return_rate", 0.07))
+    inflation = float(invest.get("inflation_rate") or 0.03)
+    cons_ret = float(invest.get("conservative_return_rate") or 0.03)
+    growth_ret = float(invest.get("growth_return_rate") or 0.07)
 
     event_log: List[str] = [
         "後端模擬開始",
