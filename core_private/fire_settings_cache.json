@@ -1,0 +1,36 @@
+{
+  "initial_settings": {
+    "age": 25,
+    "monthly_income": 30000.0,
+    "monthly_expense": 25000.0,
+    "savings": 0.0,
+    "debt": 0.0
+  },
+  "investment_config": {
+    "retirement_age": 65,
+    "life_expectancy": 85,
+    "young_growth_ratio": 0.0,
+    "young_conservative_ratio": 0.0,
+    "young_cash_reserve_ratio": 1.0,
+    "middle_growth_ratio": 0.0,
+    "middle_conservative_ratio": 0.0,
+    "middle_cash_reserve_ratio": 1.0,
+    "old_growth_ratio": 0.0,
+    "old_conservative_ratio": 0.0,
+    "old_cash_reserve_ratio": 1.0,
+    "growth_return_rate": 0.07,
+    "conservative_return_rate": 0.05,
+    "cash_return": 0.0,
+    "inflation_rate": 0.03
+  },
+  "salary_config": {
+    "young_growth_rate": 0.045,
+    "middle_growth_rate": 0.02,
+    "senior_decline_rate": 0.1,
+    "young_age_limit": 50,
+    "middle_age_limit": 55,
+    "decline_age": 56
+  },
+  "life_planning": {},
+  "random_events": {}
+}

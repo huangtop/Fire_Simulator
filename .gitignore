@@ -1,0 +1,32 @@
+# === 隱藏所有私有邏輯層 ===
+
+# 核心私有模組 - 現在需要上傳到 Streamlit Cloud
+core_private/
+
+# 其他相關檔案
+models_desktop.py
+unified_calculations_desktop.py
+ui_components.py
+main_desktop.py
+
+# 舊版本和備份
+legacy/
+.backups/
+
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# 環境
+.streamlit/
+.venv/
+sessions/
+
+# 日誌和臨時檔
+*.log
+*.json.bak*
+.DS_Store
+.vscode/
+backend/backend.log
+backend/.env
